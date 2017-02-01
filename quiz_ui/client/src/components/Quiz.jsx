@@ -1,4 +1,5 @@
 import React from 'react'
+import Question from './Question'
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class Quiz extends React.Component {
   render() {
     return ( 
       <div className="quiz">
-        The Quiz
+        <Question />
       </div>
     )
   }

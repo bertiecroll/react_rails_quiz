@@ -12,7 +12,7 @@ class User extends React.Component {
 
   render() {
     return (
-      <div className="user-component">
+      <div className="user">
         <h1>Welcome to the Cash Flow Quiz</h1>
         <h3>What is your name?</h3>
         <input type="text" onChange={this.handleInputChange}/>

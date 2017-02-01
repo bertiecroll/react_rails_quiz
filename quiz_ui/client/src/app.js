@@ -4,7 +4,7 @@ import App from './containers/App'
 
 window.onload = function(){
   ReactDOM.render(
-    <App />,
+    <App url="http://localhost:3000/quizzes/3"/>,
     document.getElementById('app')
   )
 }

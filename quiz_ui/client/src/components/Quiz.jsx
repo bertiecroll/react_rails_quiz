@@ -11,12 +11,13 @@ class Quiz extends React.Component {
       complete: false
     }
     this.submitAnswer = this.submitAnswer.bind(this)
+    this.tryAgain = this.tryAgain.bind(this)
   }
 
   render() {
     const question = this.props.questions[this.state.currentQuestion]
     const content = (this.state.complete) ?
-      <Result user={this.props.user} score={this.getScore()} /> :
+      <Result user={this.props.user} score={this.getScore()} tryAgain={this.tryAgain}/> :
       <Question question={question} submitAnswer={this.submitAnswer} score={this.getScore()}/>
     return ( 
       <div className="quiz">
@@ -31,6 +32,14 @@ class Quiz extends React.Component {
     this.setState({
       currentQuestion: this.state.currentQuestion + 1,
       complete: isComplete
+    })
+  }
+
+  tryAgain() {
+    this.setState({
+      currentQuestion: 0,
+      answerPoints: [],
+      complete: false
     })
   }
 

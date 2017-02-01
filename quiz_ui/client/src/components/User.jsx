@@ -15,7 +15,7 @@ class User extends React.Component {
       <div className="user">
         <h1>Welcome to the Cash Flow Quiz</h1>
         <h3>What is your name?</h3>
-        <input type="text" onChange={this.handleInputChange}/>
+        <input type="text" placeholder="Enter Name" onChange={this.handleInputChange}/>
         <button className="quiz-button" onClick={this.handleButtonClick}>Next</button>
       </div>
     )

@@ -18,7 +18,7 @@ class Question extends React.Component {
         <Header title={this.props.question.title} score={this.props.score} />
         <form className="answer-form" onSubmit={this.handleSubmit}>
           {this.createAnswers()}
-          <button type="submit" className="quiz-button">Next</button>
+          <button type="submit" className="answer-button">Next</button>
         </form>
       </div>
     )

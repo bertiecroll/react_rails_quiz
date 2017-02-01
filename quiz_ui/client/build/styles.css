@@ -3,23 +3,20 @@
   margin: auto;
   justify-content: center;
   font-family: 'Oxygen', sans-serif;
+  color: #2da0da;
 }
 
 .user,
-.answer-form {
+.answer-form,
+.result {
   display: flex;
   flex-direction: column;  
 }
 
-.user {
+.user,
+.result {
   margin-top: 4rem;
   align-items: center;
-}
-
-.answer-form {
-  margin-top: 2rem;
-  width: 50%;
-  align-items: flex-start;
 }
 
 .question {
@@ -34,17 +31,25 @@
   width: 60%;
   margin-top: 2rem;
   font-size: 1.25rem;
+  border-radius: 10px;
+  padding: .2rem;
 }
 
-.quiz-button {
+.quiz-button,
+.answer-button {
   margin: 2rem auto;
   padding: .25rem 2rem;
-  background-color: #2da0da;
-  color: #fff;
   font-family: 'Oxygen', sans-serif;
   font-size: 1.5rem;
   border-radius:10px;
   outline: none;
+  border: none;
+}
+
+.quiz-button {
+  background-color: #2da0da;
+  color: #fff;
+  box-shadow: 3px 3px 5px #ccc;
 }
 
 .quiz {
@@ -53,13 +58,31 @@
 
 /*ANSWER STYLES*/
 
+.answer-form {
+  background-color: #2da0da;
+  color: #fff;
+  text-align: left;
+  margin-top: 1rem;
+  padding-top: 2rem;
+  width: 650px;
+  align-items: flex-start;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px #ccc;
+}
+
+.answer-button {
+  margin-top: 4rem;
+  background-color: #fff;
+  color: #2da0da;
+}
+
 .answer label {
-  display: inline-block;
   font-size: 1.25rem;
   margin-top: .5rem;
 }
+
 .answer input {
-  margin: .5rem 1rem;
+  margin: .5rem 1rem .5rem 2rem;
   padding-bottom: .5rem;
   padding-bottom: .25rem;
 }
@@ -74,4 +97,5 @@
 
 .header-title {
   margin-top: 4rem;
+  font-size: 1.5rem;
 }

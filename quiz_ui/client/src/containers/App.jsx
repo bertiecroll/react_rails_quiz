@@ -1,12 +1,13 @@
 import React from 'react'
 import User from '../components/User'
+import Quiz from '../components/Quiz'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       quiz: {},
-      user: {}
+      currentUser: null
     }
     this.addUser = this.addUser.bind(this)
   }
@@ -26,15 +27,18 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div className='quiz-app'>
-        <User addUser={this.addUser}/>
-      </div>
-    )
+    const container = (this.state.currentUser) ?
+      <Quiz user={this.state.currentUser}/> :
+      <User addUser={this.addUser}/>
+    
+    return container
   }
 
-  addUser(userName) {
-    console.log("user added", userName)
+  addUser(user) {
+    console.log("user added", user)
+    this.setState({
+      currentUser: user
+    })
   }
 
 }

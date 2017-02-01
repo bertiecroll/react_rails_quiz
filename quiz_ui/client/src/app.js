@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './containers/App'
 
 window.onload = function(){
   ReactDOM.render(
-    <div>Cash Flow Quiz</div>,
+    <App />,
     document.getElementById('app')
   )
 }

@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  description: MyString
-  points: 1
-  question: one
+  description: "Edinburgh"
+  points: 10
+  question_id: 1
 
 two:
-  description: MyString
-  points: 1
-  question: two
+  description: "Glasgow"
+  points: 0
+  question_id: 1

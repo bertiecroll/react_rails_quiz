@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class QuizTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+ test "Quiz has a title" do
+   assert_equal("Quiz One", quizzes(:one).title)
+ end
 end

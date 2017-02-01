@@ -2,7 +2,18 @@ class QuizzesController < ApplicationController
 
   def index
     quizzes = Quiz.all
-    render json: quizzes.as_json
+    render json: quizzes.as_json({
+     only: [:id, :title],
+     include:
+       { questions: {
+         only: :title,
+         include:
+           { 
+             answers: { only: [:description, :points] }
+           } 
+         }
+       } 
+    })
   end
 
   def show

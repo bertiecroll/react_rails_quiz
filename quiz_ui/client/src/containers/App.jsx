@@ -1,10 +1,12 @@
 import React from 'react'
+import User from '../components/User'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      quiz: {}
+      quiz: {},
+      user: {}
     }
   }
 
@@ -14,9 +16,9 @@ class App extends React.Component {
     request.onload = () => {
       const jsonString = request.responseText
       const data = JSON.parse(jsonString)
-      console.log("quizzes", data)
+      console.log("quizzes", data[0])
       this.setState({
-        quiz: data
+        quiz: data[0]
       })
     }
     request.send(null)
@@ -25,7 +27,7 @@ class App extends React.Component {
   render() {
     return (
       <div className='quiz-app'>
-        Cash Flow Quiz
+        <User />
       </div>
     )
   }

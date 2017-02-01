@@ -4,7 +4,6 @@ const Answer = function(props) {
 
   return (
     <label className="answer">
-      {props.description}
       <input
         type="radio"
         name="answer"
@@ -13,6 +12,7 @@ const Answer = function(props) {
         checked={props.checked}
         onChange={props.onChange}
       />
+      {props.description}
     </label>
   )
 

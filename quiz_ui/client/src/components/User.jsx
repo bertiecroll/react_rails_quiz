@@ -16,7 +16,7 @@ class User extends React.Component {
         <h1>Welcome to the Cash Flow Quiz</h1>
         <h3>What is your name?</h3>
         <input type="text" onChange={this.handleInputChange}/>
-        <button onClick={this.handleButtonClick}>Next</button>
+        <button className="quiz-button" onClick={this.handleButtonClick}>Next</button>
       </div>
     )
   }

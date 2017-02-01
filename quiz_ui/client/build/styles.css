@@ -1,20 +1,77 @@
-.app-container {
-  border: 1px solid black;
+.app-container {  
   width: 80%;
   margin: auto;
   justify-content: center;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.user,
+.answer-form {
+  display: flex;
+  flex-direction: column;  
+}
+
+.user {
+  margin-top: 4rem;
+  align-items: center;
+}
+
+.answer-form {
+  margin-top: 2rem;
+  width: 50%;
+  align-items: flex-start;
+}
+
+.question {
+  position: relative;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user input {
+  width: 60%;
+  margin-top: 2rem;
+  font-size: 1.25rem;
+}
+
+.quiz-button {
+  margin: 2rem auto;
+  padding: .25rem 2rem;
+  background-color: #2da0da;
+  color: #fff;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1.5rem;
+  border-radius:10px;
+  outline: none;
 }
 
 .quiz {
   text-align: center;
 }
 
-.question h3 {
+/*ANSWER STYLES*/
 
+.answer label {
+  display: inline-block;
+  font-size: 1.25rem;
+  margin-top: .5rem;
+}
+.answer input {
+  margin: .5rem 1rem;
+  padding-bottom: .5rem;
+  padding-bottom: .25rem;
 }
 
-.answer-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/*HEADER STYLES*/
+
+.score {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.header-title {
+  margin-top: 4rem;
 }

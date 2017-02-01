@@ -8,6 +8,7 @@ const Answer = function(props) {
       <input
         type="radio"
         name="answer"
+        points={props.points}
         value={props.index}
         checked={props.checked}
         onChange={props.onChange}

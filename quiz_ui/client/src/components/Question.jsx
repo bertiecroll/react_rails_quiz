@@ -14,6 +14,7 @@ class Question extends React.Component {
   render() {
     return (
       <div className="question">
+        <h3>Current Score: {this.props.score}</h3>
         <h3>{this.props.question.title}</h3>
         <form className="answer-form" onSubmit={this.handleSubmit}>
           {this.createAnswers()}
@@ -31,11 +32,11 @@ class Question extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const answerIndex = this.state.selectedOption
+    const points = parseInt(event.target.answer[this.state.selectedOption].getAttribute("points"))
     this.setState({
       selectedOption: null
     })
-    this.props.submitAnswer(answerIndex)
+    this.props.submitAnswer(points)
   }
 
   createAnswers() {
@@ -44,6 +45,7 @@ class Question extends React.Component {
         <Answer
           key={index}
           index={index}
+          points={answer.points}
           description={answer.description}
           onChange={this.handleOptionChange}
           checked={this.state.selectedOption === index}

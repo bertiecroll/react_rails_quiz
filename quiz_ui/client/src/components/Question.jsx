@@ -1,5 +1,6 @@
 import React from 'react'
 import Answer from './Answer'
+import Header from './Header'
 
 class Question extends React.Component {
   constructor(props) {
@@ -14,8 +15,7 @@ class Question extends React.Component {
   render() {
     return (
       <div className="question">
-        <h3>Current Score: {this.props.score}</h3>
-        <h3>{this.props.question.title}</h3>
+        <Header title={this.props.question.title} score={this.props.score} />
         <form className="answer-form" onSubmit={this.handleSubmit}>
           {this.createAnswers()}
           <button type="submit">Next</button>

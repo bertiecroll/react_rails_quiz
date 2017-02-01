@@ -1,5 +1,6 @@
 import React from 'react'
 import Question from './Question'
+import Result from './Result'
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Quiz extends React.Component {
   render() {
     const question = this.props.questions[this.state.currentQuestion]
     const content = (this.state.complete) ?
-      "Completed!" :
+      <Result user={this.props.user} score={this.getScore()} /> :
       <Question question={question} submitAnswer={this.submitAnswer} score={this.getScore()}/>
     return ( 
       <div className="quiz">
@@ -31,8 +32,6 @@ class Quiz extends React.Component {
       currentQuestion: this.state.currentQuestion + 1,
       complete: isComplete
     })
-    console.log("answers array", this.state.answerPoints)
-    console.log("quiz completed?", this.state.complete)
   }
 
   isQuizComplete() {

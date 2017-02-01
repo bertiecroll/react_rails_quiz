@@ -5,7 +5,9 @@ class Quiz extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentQuestion: 0
+      currentQuestion: 0,
+      answers: [],
+      complete: false
     }
     this.submitAnswer = this.submitAnswer.bind(this)
   }
@@ -19,9 +21,12 @@ class Quiz extends React.Component {
     )
   }
 
-  submitAnswer(event) {
-    event.preventDefault()
-    console.log("submit question target answer", event.target.answer.value)
+  submitAnswer(answerIndex) {    
+    this.state.answers[this.state.currentQuestion] = answerIndex
+    this.setState({
+      currentQuestion: this.state.currentQuestion + 1,
+    })
+    console.log("answers array", this.state.answers)
   }
 }
 

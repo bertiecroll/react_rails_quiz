@@ -1,18 +1,56 @@
 import React from 'react'
 import Answer from './Answer'
 
-const Question = function({question, submitAnswer}) {
+class Question extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedOption: null
+    }
+    this.handleOptionChange = this.handleOptionChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
   
-  return (
-    <div className="question">
-      <h3>{question.title}</h3>
-      <Answer
-        answers={question.answers}
-        submitAnswer={submitAnswer}
-      />
-    </div>
-  )
+  render() {
+    return (
+      <div className="question">
+        <h3>{this.props.question.title}</h3>
+        <form className="answer-form" onSubmit={this.handleSubmit}>
+          {this.createAnswers()}
+          <button type="submit">Next</button>
+        </form>
+      </div>
+    )
+  }
 
+  handleOptionChange(event) {
+    this.setState({
+      selectedOption: parseInt(event.target.value)
+    })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    const answerIndex = this.state.selectedOption
+    this.setState({
+      selectedOption: null
+    })
+    this.props.submitAnswer(answerIndex)
+  }
+
+  createAnswers() {
+    return this.props.question.answers.map((answer, index) => {
+      return (
+        <Answer
+          key={index}
+          index={index}
+          description={answer.description}
+          onChange={this.handleOptionChange}
+          checked={this.state.selectedOption === index}
+        />   
+      )
+    })
+  }
 }
 
 export default Question

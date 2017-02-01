@@ -1,5 +1,6 @@
 require 'csv'
 
+Result.delete_all()
 User.delete_all()
 Answer.delete_all()
 Question.delete_all()

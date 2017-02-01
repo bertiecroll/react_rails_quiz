@@ -1,6 +1,6 @@
 import React from 'react'
-import Question from './Question'
-import Result from './Result'
+import Question from '../components/Question'
+import Result from '../components/Result'
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -29,6 +29,10 @@ class Quiz extends React.Component {
   submitAnswer(points) {    
     this.state.answerPoints[this.state.currentQuestion] = points
     const isComplete = this.isQuizComplete()
+    if (isComplete) {
+      const score = this.getScore()
+      this.props.submitResult(score)
+    }
     this.setState({
       currentQuestion: this.state.currentQuestion + 1,
       complete: isComplete

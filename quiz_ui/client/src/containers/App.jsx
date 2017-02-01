@@ -8,6 +8,7 @@ class App extends React.Component {
       quiz: {},
       user: {}
     }
+    this.addUser = this.addUser.bind(this)
   }
 
   componentDidMount() {
@@ -27,9 +28,13 @@ class App extends React.Component {
   render() {
     return (
       <div className='quiz-app'>
-        <User />
+        <User addUser={this.addUser}/>
       </div>
     )
+  }
+
+  addUser(userName) {
+    console.log("user added", userName)
   }
 
 }

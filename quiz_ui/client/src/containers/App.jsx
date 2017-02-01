@@ -28,7 +28,7 @@ class App extends React.Component {
 
   render() {
     const container = (this.state.currentUser) ?
-      <Quiz user={this.state.currentUser}/> :
+      <Quiz user={this.state.currentUser} questions={this.state.quiz.questions}/> :
       <User addUser={this.addUser}/>
     
     return container

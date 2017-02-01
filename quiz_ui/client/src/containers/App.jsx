@@ -14,7 +14,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const request = new XMLHttpRequest()
-    request.open('GET', this.props.url)
+    request.open('GET', `${this.props.url}quizzes`)
     request.onload = () => {
       const jsonString = request.responseText
       const data = JSON.parse(jsonString)
@@ -28,7 +28,7 @@ class App extends React.Component {
 
   render() {
     const content = (this.state.currentUser) ?
-      <Quiz user={this.state.currentUser} questions={this.state.quiz.questions}/> :
+      <Quiz user={this.state.currentUser.name} questions={this.state.quiz.questions}/> :
       <User addUser={this.addUser}/>
     
     return (
@@ -38,11 +38,26 @@ class App extends React.Component {
     )
   }
 
-  addUser(user) {
-    console.log("user added", user)
-    this.setState({
-      currentUser: user
-    })
+  addUser(userName) {
+    const request = new XMLHttpRequest()
+    request.open("POST", `${this.props.url}users`)
+    request.setRequestHeader("Content-Type", "application/json")
+    request.withCredentials = true
+    request.onload = () => {
+      if(request.status === 200){
+        const user = JSON.parse(request.responseText)
+        console.log("user added", user)
+        this.setState({
+          currentUser: user
+        })
+      }
+    }
+    const data = {
+      user:{
+        name: userName
+      }
+    }
+    request.send(JSON.stringify(data))
   }
 
 }

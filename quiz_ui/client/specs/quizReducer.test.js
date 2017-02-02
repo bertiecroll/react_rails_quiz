@@ -152,7 +152,7 @@ describe('QuizReducer', function() {
     const expected = {
       quiz: {id: 3, title: "Test Quiz", questions: ["a","b","c"]},
       currentUser: null,
-      totalQuestions: 0,
+      totalQuestions: 3,
       currentQuestion: 0,
       scoreCard: [],
       perfectCard: [],

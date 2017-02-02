@@ -1,7 +1,7 @@
 import * as QuizActions from '../src/actions/quiz'
 import * as QuizActionTypes from '../src/actiontypes/quiz'
 
-describe('Actions', function() {
+describe('QuizActions', function() {
   it('should create action to set quiz', function() {
     const quiz = {id: 3, title: "Test Quiz", Questions: []}
     const expectedAction = {

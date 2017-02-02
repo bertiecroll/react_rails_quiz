@@ -21,14 +21,12 @@ describe('QuizActions', function() {
   })
 
   it('should create action to update scorecard', function() {
-    const index = 1
     const score = 15
     const expectedAction = {
       type: QuizActionTypes.UPDATE_SCORECARD,
-      index,
       score
     }
-    expect(QuizActions.updateScoreCard(1, 15)).toEqual(expectedAction)
+    expect(QuizActions.updateScoreCard(15)).toEqual(expectedAction)
   })
 
   it('should create action to update question index', function() {
@@ -45,5 +43,12 @@ describe('QuizActions', function() {
       type: QuizActionTypes.TOGGLE_COMPLETE
     }
     expect(QuizActions.toggleComplete()).toEqual(expectedAction)
+  })
+
+  it('should create action to reset quiz', function() {
+    const expectedAction = {
+      type: QuizActionTypes.RESET_QUIZ
+    }
+    expect(QuizActions.resetQuiz()).toEqual(expectedAction)
   })
 })

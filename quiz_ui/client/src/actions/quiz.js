@@ -14,10 +14,9 @@ export const setUser = function(user) {
   }
 }
 
-export const updateScoreCard = function(index, score) {
+export const updateScoreCard = function(score) {
   return {
     type: QuizActionTypes.UPDATE_SCORECARD,
-    index,
     score
   }
 }
@@ -32,5 +31,11 @@ export const updateQuestionIndex = function(index) {
 export const toggleComplete = function() {
   return {
     type: QuizActionTypes.TOGGLE_COMPLETE
+  }
+}
+
+export const resetQuiz = function() {
+  return {
+    type: QuizActionTypes.RESET_QUIZ
   }
 }

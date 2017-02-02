@@ -38,7 +38,7 @@ class Question extends React.Component {
     this.setState({
       selectedOption: null
     })
-    this.props.updateScoreCard(index, points)
+    this.props.updateScoreCard(points)
   }
 
   createAnswers() {

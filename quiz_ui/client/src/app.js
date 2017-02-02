@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import QuizReducer from './src/reducers/quiz'
+import QuizReducer from './reducers/quiz'
 import App from './containers/App'
 
 const store = createStore(QuizReducer)

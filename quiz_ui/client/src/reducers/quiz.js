@@ -3,6 +3,7 @@ import * as QuizActionTypes from '../actiontypes/quiz'
 const initialState = {
   quiz: null,
   currentUser: null,
+  totalQuestions: 0,
   currentQuestion: 0,
   scoreCard: [],
   complete: false
@@ -12,7 +13,8 @@ const Quiz = function(state=initialState, action) {
   switch(action.type) {
     case QuizActionTypes.SET_QUIZ:
       return Object.assign({}, state, {
-        quiz: action.quiz
+        quiz: action.quiz,
+        totalQuestions: action.quiz.questions.length
       })
     case QuizActionTypes.SET_USER:
       return Object.assign({}, state, {
@@ -20,10 +22,9 @@ const Quiz = function(state=initialState, action) {
       })
     case QuizActionTypes.UPDATE_SCORECARD:
       return Object.assign({}, state, {
-        scoreCard: state.scoreCard.slice(0, action.index)
-                      .concat([action.score])
-                      .concat(state.scoreCard.slice(action.index + 1)),
-        complete: (state.scoreCard.length === state.quiz.questions.length)
+        scoreCard: state.scoreCard.concat([action.score]),
+        currentQuestion: state.currentQuestion + 1,
+        complete: (state.currentQuestion + 1 >= state.totalQuestions)
       })
     case QuizActionTypes.UPDATE_QUESTION_INDEX:
       return Object.assign({}, state, {
@@ -32,6 +33,12 @@ const Quiz = function(state=initialState, action) {
     case QuizActionTypes.TOGGLE_COMPLETE:
       return Object.assign({}, state, {
         complete: !state.complete
+      })
+    case QuizActionTypes.RESET_QUIZ:
+      return Object.assign({}, state, {
+        currentQuestion: 0,
+        scoreCard: [],
+        complete: false
       })
     default:
       return state

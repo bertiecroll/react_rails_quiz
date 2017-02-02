@@ -17,7 +17,7 @@ class App extends React.Component {
     request.onload = () => {
       const jsonString = request.responseText
       const data = JSON.parse(jsonString)
-      this.props.dispatch(QuizActionCreators.setQuiz, data[0])
+      this.props.dispatch(QuizActionCreators.setQuiz(data[0]))
     }
     request.send(null)
   }
@@ -47,6 +47,7 @@ class App extends React.Component {
 
   render() {
     const {dispatch, quiz, currentUser, currentQuestion, score, complete} = this.props
+    console.log("quiz", quiz)
     const updateScoreCard = bindActionCreators(QuizActionCreators.updateScoreCard, dispatch)
     const updateQuestionIndex = bindActionCreators(QuizActionCreators.updateQuestionIndex, dispatch)
 
@@ -56,7 +57,6 @@ class App extends React.Component {
         questions={quiz.questions}
         currentQuestion={currentQuestion}
         updateQuestionIndex={updateQuestionIndex}
-        scoreCard={scoreCard}
         score={score}
         updateScoreCard={updateScoreCard}
         complete={complete}
@@ -78,7 +78,7 @@ class App extends React.Component {
     request.onload = () => {
       if(request.status === 200){
         const user = JSON.parse(request.responseText)
-        this.props.dispatch(QuizActionCreators.setUser, data[0])
+        this.props.dispatch(QuizActionCreators.setUser(user))
       }
     }
     const data = {
@@ -92,10 +92,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = function(state) {
+  console.log(state)
   return {
-    quiz: state.user,
+    quiz: state.quiz,
     currentUser: state.currentUser,
-    score: this.state.scoreCard.reduce(function(total, points) {
+    score: state.scoreCard.reduce(function(total, points) {
               return total + points
             }, 0),
     currentQuestion: state.currentQuestion,

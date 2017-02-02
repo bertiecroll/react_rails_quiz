@@ -6,6 +6,7 @@ describe('QuizReducer', function() {
     const expected = {
       quiz: null,
       currentUser: null,
+      totalQuestions: 0,
       currentQuestion: 0,
       scoreCard: [],
       complete: false
@@ -14,7 +15,7 @@ describe('QuizReducer', function() {
   })
 
   it('should handle SET_QUIZ', function() {
-    const quiz = {id: 3, title: "Test Quiz", Questions: []}
+    const quiz = {id: 3, title: "Test Quiz", questions: []}
     const action = {
       type: QuizActionTypes.SET_QUIZ,
       quiz: quiz
@@ -22,6 +23,7 @@ describe('QuizReducer', function() {
     const expected = {
       quiz: quiz,
       currentUser: null,
+      totalQuestions: 0,
       currentQuestion: 0,
       scoreCard: [],
       complete: false  
@@ -38,6 +40,7 @@ describe('QuizReducer', function() {
     const expected = {
       quiz: null,
       currentUser: user,
+      totalQuestions: 0,
       currentQuestion: 0,
       scoreCard: [],
       complete: false  
@@ -48,17 +51,25 @@ describe('QuizReducer', function() {
   it('should handle UPDATE_SCORECARD', function() {
     const action = {
       type: QuizActionTypes.UPDATE_SCORECARD,
-      index: 0,
       score: 15
     }
-    const expected = {
-      quiz: null,
+    const state = {
+      quiz: {id: 3, title: "Test Quiz", questions: ["a","b","c"]},
       currentUser: null,
+      totalQuestions: 3,
       currentQuestion: 0,
+      scoreCard: [],
+      complete: false
+    }
+    const expected = {
+      quiz: {id: 3, title: "Test Quiz", questions: ["a","b","c"]},
+      currentUser: null,
+      totalQuestions: 3,
+      currentQuestion: 1,
       scoreCard: [15],
       complete: false  
     }
-    expect(quizReducer(undefined, action)).toEqual(expected)
+    expect(quizReducer(state, action)).toEqual(expected)
   })
 
   it('should handle UPDATE_QUESTION_INDEX', function() {
@@ -69,6 +80,7 @@ describe('QuizReducer', function() {
     const expected = {
       quiz: null,
       currentUser: null,
+      totalQuestions: 0,
       currentQuestion: 1,
       scoreCard: [],
       complete: false  
@@ -83,11 +95,35 @@ describe('QuizReducer', function() {
     const expected = {
       quiz: null,
       currentUser: null,
+      totalQuestions: 0,
       currentQuestion: 0,
       scoreCard: [],
-      complete: true  
+      complete: true
     }
     expect(quizReducer(undefined, action)).toEqual(expected)
+  })
+
+  it('should handle RESET_QUIZ', function() {
+    const action = {
+      type: QuizActionTypes.RESET_QUIZ
+    }
+    const state = {
+      quiz: {id: 3, title: "Test Quiz", questions: ["a","b","c"]},
+      currentUser: {name: "John Smith"},
+      totalQuestions: 3,
+      currentQuestion: 3,
+      scoreCard: [10,10,10],
+      complete: true
+    }
+    const expected = {
+      quiz: {id: 3, title: "Test Quiz", questions: ["a","b","c"]},
+      currentUser: {name: "John Smith"},
+      totalQuestions: 3,
+      currentQuestion: 0,
+      scoreCard: [],
+      complete: false 
+    }
+    expect(quizReducer(state, action)).toEqual(expected)
   })
 
 })

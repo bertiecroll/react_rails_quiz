@@ -9,7 +9,7 @@ class Quiz extends React.Component {
   }
 
   render() {
-    const {user, questions, currentQuestion, updateScoreCard, score, complete} = this.props
+    const {user, questions, currentQuestion, updateQuestionIndex, updateScoreCard, score, complete} = this.props
     const question = questions[currentQuestion]
     const content = (complete) ?
       <Result
@@ -21,6 +21,7 @@ class Quiz extends React.Component {
         index={currentQuestion}
         question={question}
         updateScoreCard={updateScoreCard}
+        updateQuestionIndex={updateQuestionIndex}
         score={score}/>
     return ( 
       <div className="quiz">

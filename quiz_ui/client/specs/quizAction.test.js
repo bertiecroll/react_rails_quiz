@@ -21,12 +21,14 @@ describe('QuizActions', function() {
   })
 
   it('should create action to update scorecard', function() {
-    const score = 15
+    const score = 10
+    const topScore = 15
     const expectedAction = {
       type: QuizActionTypes.UPDATE_SCORECARD,
-      score
+      score,
+      topScore
     }
-    expect(QuizActions.updateScoreCard(15)).toEqual(expectedAction)
+    expect(QuizActions.updateScoreCard(10, 15)).toEqual(expectedAction)
   })
 
   it('should create action to update question index', function() {

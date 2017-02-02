@@ -13,10 +13,10 @@ class Question extends React.Component {
   }
   
   render() {
-    const {question, score, index} = this.props
+    const {user, question, score, index} = this.props
     return (
       <div className="question">
-        <Header title={question.title} score={score} index={index}/>
+        <Header user={user} title={question.title} score={score} index={index}/>
         <form className="answer-form" onSubmit={this.handleSubmit}>
           {this.createAnswers()}
           <button type="submit" className="answer-button">Next</button>
@@ -34,11 +34,19 @@ class Question extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const index = this.state.selectedOption
-    const points = parseInt(event.target.answer[index].getAttribute("points"))
+    const score = parseInt(event.target.answer[index].getAttribute("points"))
+    const topScore = this.getTopScore()
     this.setState({
       selectedOption: null
     })
-    this.props.updateScoreCard(points)
+    this.props.updateScoreCard(score, topScore)
+  }
+
+  getTopScore() {
+    const scores =  this.props.question.answers.map(function(answer) {
+      return answer.points
+    })
+    return Math.max(...scores)
   }
 
   createAnswers() {

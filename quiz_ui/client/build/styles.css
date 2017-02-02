@@ -108,6 +108,12 @@
 
 .question-count {
   position: absolute;
+  top: 25px;
+  left: 0;
+}
+
+.user-name {
+  position: absolute;
   top: 0;
   left: 0;
 }

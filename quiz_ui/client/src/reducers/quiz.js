@@ -6,6 +6,7 @@ const initialState = {
   totalQuestions: 0,
   currentQuestion: 0,
   scoreCard: [],
+  perfectCard: [],
   complete: false
 }
 
@@ -23,6 +24,7 @@ const Quiz = function(state=initialState, action) {
     case QuizActionTypes.UPDATE_SCORECARD:
       return Object.assign({}, state, {
         scoreCard: state.scoreCard.concat([action.score]),
+        perfectCard: state.perfectCard.concat([action.topScore]),
         currentQuestion: state.currentQuestion + 1,
         complete: (state.currentQuestion + 1 >= state.totalQuestions)
       })
@@ -38,6 +40,7 @@ const Quiz = function(state=initialState, action) {
       return Object.assign({}, state, {
         currentQuestion: 0,
         scoreCard: [],
+        perfectCard: [],
         complete: false
       })
     default:

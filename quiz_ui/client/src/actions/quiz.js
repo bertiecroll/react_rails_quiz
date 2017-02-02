@@ -14,10 +14,11 @@ export const setUser = function(user) {
   }
 }
 
-export const updateScoreCard = function(score) {
+export const updateScoreCard = function(score, topScore) {
   return {
     type: QuizActionTypes.UPDATE_SCORECARD,
-    score
+    score,
+    topScore
   }
 }
 

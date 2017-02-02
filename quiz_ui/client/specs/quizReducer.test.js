@@ -9,6 +9,7 @@ describe('QuizReducer', function() {
       totalQuestions: 0,
       currentQuestion: 0,
       scoreCard: [],
+      perfectCard: [],
       complete: false
     }
     expect(quizReducer(undefined, {})).toEqual(expected)
@@ -26,6 +27,7 @@ describe('QuizReducer', function() {
       totalQuestions: 0,
       currentQuestion: 0,
       scoreCard: [],
+      perfectCard: [],
       complete: false  
     }
     expect(quizReducer(undefined, action)).toEqual(expected)
@@ -43,6 +45,7 @@ describe('QuizReducer', function() {
       totalQuestions: 0,
       currentQuestion: 0,
       scoreCard: [],
+      perfectCard: [],
       complete: false  
     }
     expect(quizReducer(undefined, action)).toEqual(expected)
@@ -51,7 +54,8 @@ describe('QuizReducer', function() {
   it('should handle UPDATE_SCORECARD', function() {
     const action = {
       type: QuizActionTypes.UPDATE_SCORECARD,
-      score: 15
+      score: 10,
+      topScore: 15
     }
     const state = {
       quiz: {id: 3, title: "Test Quiz", questions: ["a","b","c"]},
@@ -59,6 +63,7 @@ describe('QuizReducer', function() {
       totalQuestions: 3,
       currentQuestion: 0,
       scoreCard: [],
+      perfectCard: [],
       complete: false
     }
     const expected = {
@@ -66,7 +71,8 @@ describe('QuizReducer', function() {
       currentUser: null,
       totalQuestions: 3,
       currentQuestion: 1,
-      scoreCard: [15],
+      scoreCard: [10],
+      perfectCard: [15],
       complete: false  
     }
     expect(quizReducer(state, action)).toEqual(expected)
@@ -83,6 +89,7 @@ describe('QuizReducer', function() {
       totalQuestions: 0,
       currentQuestion: 1,
       scoreCard: [],
+      perfectCard: [],
       complete: false  
     }
     expect(quizReducer(undefined, action)).toEqual(expected)
@@ -98,6 +105,7 @@ describe('QuizReducer', function() {
       totalQuestions: 0,
       currentQuestion: 0,
       scoreCard: [],
+      perfectCard: [],
       complete: true
     }
     expect(quizReducer(undefined, action)).toEqual(expected)
@@ -113,6 +121,7 @@ describe('QuizReducer', function() {
       totalQuestions: 3,
       currentQuestion: 3,
       scoreCard: [10,10,10],
+      perfectCard: [15,15,15],
       complete: true
     }
     const expected = {
@@ -121,6 +130,7 @@ describe('QuizReducer', function() {
       totalQuestions: 3,
       currentQuestion: 0,
       scoreCard: [],
+      perfectCard: [],
       complete: false 
     }
     expect(quizReducer(state, action)).toEqual(expected)

@@ -46,7 +46,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {dispatch, quiz, currentUser, currentQuestion, score, complete} = this.props
+    const {dispatch, quiz, currentUser, currentQuestion, score, topScore, complete} = this.props
     console.log("quiz", quiz)
     const updateScoreCard = bindActionCreators(QuizActionCreators.updateScoreCard, dispatch)
     const updateQuestionIndex = bindActionCreators(QuizActionCreators.updateQuestionIndex, dispatch)
@@ -59,6 +59,7 @@ class App extends React.Component {
         currentQuestion={currentQuestion}
         updateQuestionIndex={updateQuestionIndex}
         score={score}
+        topScore={topScore}
         updateScoreCard={updateScoreCard}
         resetQuiz={resetQuiz}
         complete={complete}
@@ -101,6 +102,9 @@ const mapStateToProps = function(state) {
     score: state.scoreCard.reduce(function(total, points) {
               return total + points
             }, 0),
+    topScore: state.perfectCard.reduce(function(total, points) {
+                return total + points
+              }, 0),
     currentQuestion: state.currentQuestion,
     complete: state.complete
   }

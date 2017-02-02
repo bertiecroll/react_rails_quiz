@@ -41,7 +41,6 @@ class Question extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const index = this.state.selectedOption
-    console.log(index)
     if (index !== null) {
       const score = parseInt(event.target.answer[index].getAttribute("points"))
       const topScore = this.getTopScore()

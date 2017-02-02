@@ -31,7 +31,6 @@ class App extends React.Component {
       request.onload = () => {
         if(request.status === 200){
           const result = JSON.parse(request.responseText)
-          console.log("result submitted", result)
         }
       }
       const data = {
@@ -47,7 +46,6 @@ class App extends React.Component {
 
   render() {
     const {dispatch, quiz, currentUser, currentQuestion, score, topScore, complete} = this.props
-    console.log("quiz", quiz)
     const updateScoreCard = bindActionCreators(QuizActionCreators.updateScoreCard, dispatch)
     const updateQuestionIndex = bindActionCreators(QuizActionCreators.updateQuestionIndex, dispatch)
     const resetQuiz = bindActionCreators(QuizActionCreators.resetQuiz, dispatch)
@@ -95,7 +93,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = function(state) {
-  console.log(state)
   return {
     quiz: state.quiz,
     currentUser: state.currentUser,

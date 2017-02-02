@@ -3,9 +3,15 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import QuizReducer from './reducers/quiz'
+import { loadState, saveState } from './localStorage.js'
 import App from './containers/App'
 
-const store = createStore(QuizReducer)
+const persistedState = loadState()
+const store = createStore(QuizReducer, persistedState)
+
+store.subscribe(function() {
+  saveState(store.getState())
+})
 
 window.onload = function(){
   ReactDOM.render(

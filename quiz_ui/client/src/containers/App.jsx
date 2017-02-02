@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as QuizActionCreators from '../actions/quiz'
+import { loadState, saveState } from '../localStorage.js'
 import User from '../components/User'
 import Quiz from '../components/Quiz'
 
@@ -12,14 +13,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const request = new XMLHttpRequest()
-    request.open('GET', `${this.props.url}quizzes`)
-    request.onload = () => {
-      const jsonString = request.responseText
-      const data = JSON.parse(jsonString)
-      this.props.dispatch(QuizActionCreators.setQuiz(data[0]))
+    if (!this.props.quiz) {
+      const request = new XMLHttpRequest()
+      request.open('GET', `${this.props.url}quizzes`)
+      request.onload = () => {
+        const jsonString = request.responseText
+        const data = JSON.parse(jsonString)
+        this.props.dispatch(QuizActionCreators.setQuiz(data[0]))
+      }
+      request.send(null)
     }
-    request.send(null)
   }
 
   componentDidUpdate() {

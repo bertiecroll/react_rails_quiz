@@ -1,12 +1,14 @@
 import React from 'react'
 import Answer from './Answer'
 import Header from './Header'
+import ErrorBox from './ErrorBox'
 
 class Question extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedOption: null
+      selectedOption: null,
+      displayError: false
     }
     this.handleOptionChange = this.handleOptionChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,25 +23,38 @@ class Question extends React.Component {
           {this.createAnswers()}
           <button type="submit" className="answer-button">Next</button>
         </form>
+        <ErrorBox
+          show={this.state.displayError}
+          message="Please select option"
+        />
       </div>
     )
   }
 
   handleOptionChange(event) {
     this.setState({
-      selectedOption: parseInt(event.target.value)
+      selectedOption: parseInt(event.target.value),
+      displayError: false
     })
   }
 
   handleSubmit(event) {
     event.preventDefault()
     const index = this.state.selectedOption
-    const score = parseInt(event.target.answer[index].getAttribute("points"))
-    const topScore = this.getTopScore()
-    this.setState({
-      selectedOption: null
-    })
-    this.props.updateScoreCard(score, topScore)
+    console.log(index)
+    if (index !== null) {
+      const score = parseInt(event.target.answer[index].getAttribute("points"))
+      const topScore = this.getTopScore()
+      this.setState({
+        selectedOption: null,
+        displayError: false
+      })
+      this.props.updateScoreCard(score, topScore)
+    } else {
+      this.setState({
+        displayError: true
+      })
+    }
   }
 
   getTopScore() {

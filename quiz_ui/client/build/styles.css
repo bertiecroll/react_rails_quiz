@@ -57,6 +57,10 @@
   text-align: center;
 }
 
+.error-message {
+  color: #E53030;
+}
+
 /*ANSWER STYLES*/
 
 .answer-form {

@@ -44,7 +44,13 @@ const Quiz = function(state=initialState, action) {
         complete: false
       })
     case QuizActionTypes.END_QUIZ:
-      return initialState
+      return Object.assign({}, state, {
+        currentUser: null,
+        currentQuestion: 0,
+        scoreCard: [],
+        perfectCard: [],
+        complete: false 
+      })
     default:
       return state
   }

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as QuizActionCreators from '../actions/quiz'
 import User from '../components/User'
-import Quiz from './Quiz'
+import Quiz from '../components/Quiz'
 
 class App extends React.Component {
   constructor(props) {
@@ -50,6 +50,7 @@ class App extends React.Component {
     console.log("quiz", quiz)
     const updateScoreCard = bindActionCreators(QuizActionCreators.updateScoreCard, dispatch)
     const updateQuestionIndex = bindActionCreators(QuizActionCreators.updateQuestionIndex, dispatch)
+    const resetQuiz = bindActionCreators(QuizActionCreators.resetQuiz, dispatch)
 
     const content = (currentUser) ?
       <Quiz
@@ -59,6 +60,7 @@ class App extends React.Component {
         updateQuestionIndex={updateQuestionIndex}
         score={score}
         updateScoreCard={updateScoreCard}
+        resetQuiz={resetQuiz}
         complete={complete}
       /> :
       <User addUser={this.addUser}/>

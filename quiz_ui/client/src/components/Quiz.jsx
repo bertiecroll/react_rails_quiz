@@ -1,21 +1,20 @@
 import React from 'react'
-import Question from '../components/Question'
-import Result from '../components/Result'
+import Question from './Question'
+import Result from './Result'
 
 class Quiz extends React.Component {
   constructor(props) {
     super(props)
-    this.tryAgain = this.tryAgain.bind(this)
   }
 
   render() {
-    const {user, questions, currentQuestion, updateQuestionIndex, updateScoreCard, score, complete} = this.props
+    const {user, questions, currentQuestion, updateQuestionIndex, updateScoreCard, score, complete, resetQuiz} = this.props
     const question = questions[currentQuestion]
     const content = (complete) ?
       <Result
         user={user}
         score={score}
-        tryAgain={this.tryAgain}
+        resetQuiz={resetQuiz}
       /> :
       <Question
         index={currentQuestion}
@@ -28,14 +27,6 @@ class Quiz extends React.Component {
         {content}  
       </div>
     )
-  }
-
-  tryAgain() {
-    this.setState({
-      currentQuestion: 0,
-      scoreCard: [],
-      complete: false
-    })
   }
 }
 

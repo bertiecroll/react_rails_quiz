@@ -22,7 +22,8 @@ const Quiz = function(state=initialState, action) {
       return Object.assign({}, state, {
         scoreCard: state.scoreCard.slice(0, action.index)
                       .concat([action.score])
-                      .concat(state.scoreCard.slice(action.index + 1))
+                      .concat(state.scoreCard.slice(action.index + 1)),
+        complete: (state.scoreCard.length === state.quiz.questions.length)
       })
     case QuizActionTypes.UPDATE_QUESTION_INDEX:
       return Object.assign({}, state, {

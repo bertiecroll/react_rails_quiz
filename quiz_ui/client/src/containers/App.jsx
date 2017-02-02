@@ -1,14 +1,13 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as QuizActionCreators from '../actions/quiz'
 import User from '../components/User'
 import Quiz from './Quiz'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      quiz: null,
-      currentUser: null
-    }
     this.addUser = this.addUser.bind(this)
     this.submitResult = this.submitResult.bind(this)
   }
@@ -19,19 +18,25 @@ class App extends React.Component {
     request.onload = () => {
       const jsonString = request.responseText
       const data = JSON.parse(jsonString)
-      console.log("quizzes", data[0])
-      this.setState({
-        quiz: data[0]
-      })
+      this.props.dispatch(QuizActionCreators.setQuiz, data[0])
     }
     request.send(null)
   }
 
   render() {
-    const content = (this.state.currentUser) ?
+    const {dispatch, quiz, currentUser, currentQuestion, scoreCard, complete} = this.props
+    const updateScoreCard = bindActionCreators(QuizActionCreators.updateScoreCard, dispatch)
+    const updateQuestionIndex = bindActionCreators(QuizActionCreators.updateQuestionIndex, dispatch)
+
+    const content = (currentUser) ?
       <Quiz
-        user={this.state.currentUser.name}
-        questions={this.state.quiz.questions}
+        user={currentUser.name}
+        questions={quiz.questions}
+        currentQuestion={currentQuestion}
+        updateQuestionIndex={updateQuestionIndex}
+        scoreCard={scoreCard}
+        updateScoreCard={updateScoreCard}
+        complete={complete}
         submitResult={this.submitResult}
       /> :
       <User addUser={this.addUser}/>
@@ -51,10 +56,7 @@ class App extends React.Component {
     request.onload = () => {
       if(request.status === 200){
         const user = JSON.parse(request.responseText)
-        console.log("user added", user)
-        this.setState({
-          currentUser: user
-        })
+        this.props.dispatch(QuizActionCreators.setUser, data[0])
       }
     }
     const data = {
@@ -88,4 +90,14 @@ class App extends React.Component {
 
 }
 
-export default App
+const mapStateToProps = function(state) {
+  return {
+    quiz: state.user,
+    currentUser: state.currentUser,
+    scoreCard: state.scoreCard,
+    currentQuestion: state.currentQuestion,
+    complete: state.complete
+  }
+}
+
+export default connect(mapStateToProps)(App)

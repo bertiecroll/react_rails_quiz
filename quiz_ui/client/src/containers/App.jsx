@@ -9,7 +9,6 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.addUser = this.addUser.bind(this)
-    this.submitResult = this.submitResult.bind(this)
   }
 
   componentDidMount() {
@@ -23,8 +22,31 @@ class App extends React.Component {
     request.send(null)
   }
 
+  componentDidUpdate() {
+    if(this.props.complete) {
+      const request = new XMLHttpRequest()
+      request.open("POST", `${this.props.url}results`)
+      request.setRequestHeader("Content-Type", "application/json")
+      request.withCredentials = true
+      request.onload = () => {
+        if(request.status === 200){
+          const result = JSON.parse(request.responseText)
+          console.log("result submitted", result)
+        }
+      }
+      const data = {
+        result:{
+          user_id: this.props.currentUser.id,
+          quiz_id: this.props.quiz.id,
+          score: this.props.score
+        }
+      }
+      request.send(JSON.stringify(data))
+    }
+  }
+
   render() {
-    const {dispatch, quiz, currentUser, currentQuestion, scoreCard, complete} = this.props
+    const {dispatch, quiz, currentUser, currentQuestion, score, complete} = this.props
     const updateScoreCard = bindActionCreators(QuizActionCreators.updateScoreCard, dispatch)
     const updateQuestionIndex = bindActionCreators(QuizActionCreators.updateQuestionIndex, dispatch)
 
@@ -35,9 +57,9 @@ class App extends React.Component {
         currentQuestion={currentQuestion}
         updateQuestionIndex={updateQuestionIndex}
         scoreCard={scoreCard}
+        score={score}
         updateScoreCard={updateScoreCard}
         complete={complete}
-        submitResult={this.submitResult}
       /> :
       <User addUser={this.addUser}/>
     
@@ -67,34 +89,15 @@ class App extends React.Component {
     request.send(JSON.stringify(data))
   }
 
-  submitResult(score) {
-    const request = new XMLHttpRequest()
-    request.open("POST", `${this.props.url}results`)
-    request.setRequestHeader("Content-Type", "application/json")
-    request.withCredentials = true
-    request.onload = () => {
-      if(request.status === 200){
-        const result = JSON.parse(request.responseText)
-        console.log("result submitted", result)
-      }
-    }
-    const data = {
-      result:{
-        user_id: this.state.currentUser.id,
-        quiz_id: this.state.quiz.id,
-        score: score
-      }
-    }
-    request.send(JSON.stringify(data))
-  }
-
 }
 
 const mapStateToProps = function(state) {
   return {
     quiz: state.user,
     currentUser: state.currentUser,
-    scoreCard: state.scoreCard,
+    score: this.state.scoreCard.reduce(function(total, points) {
+              return total + points
+            }, 0),
     currentQuestion: state.currentQuestion,
     complete: state.complete
   }

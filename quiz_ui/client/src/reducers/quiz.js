@@ -26,7 +26,7 @@ const Quiz = function(state=initialState, action) {
       })
     case QuizActionTypes.UPDATE_QUESTION_INDEX:
       return Object.assign({}, state, {
-        currentQuestion: action.questionIndex
+        currentQuestion: action.index
       })
     case QuizActionTypes.TOGGLE_COMPLETE:
       return Object.assign({}, state, {

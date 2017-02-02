@@ -44,6 +44,7 @@
   border-radius:10px;
   outline: none;
   border: none;
+  transition: .5s transform;
 }
 
 .quiz-button {
@@ -76,6 +77,12 @@
   color: #2da0da;
 }
 
+.answer-button:hover,
+.quiz-button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+} 
+
 .answer label {
   font-size: 1.25rem;
   margin-top: .5rem;
@@ -87,12 +94,22 @@
   padding-bottom: .25rem;
 }
 
+.answer input:hover {
+  cursor: pointer;
+}
+
 /*HEADER STYLES*/
 
 .score {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.question-count {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .header-title {

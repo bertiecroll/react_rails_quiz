@@ -7,7 +7,7 @@ class Quiz extends React.Component {
     super(props)
     this.state = {
       currentQuestion: 0,
-      answerPoints: [],
+      scoreCard: [],
       complete: false
     }
     this.submitAnswer = this.submitAnswer.bind(this)
@@ -18,7 +18,11 @@ class Quiz extends React.Component {
     const question = this.props.questions[this.state.currentQuestion]
     const content = (this.state.complete) ?
       <Result user={this.props.user} score={this.getScore()} tryAgain={this.tryAgain}/> :
-      <Question question={question} submitAnswer={this.submitAnswer} score={this.getScore()}/>
+      <Question
+        index={this.state.currentQuestion}
+        question={question}
+        submitAnswer={this.submitAnswer}
+        score={this.getScore()}/>
     return ( 
       <div className="quiz">
         {content}  
@@ -27,7 +31,7 @@ class Quiz extends React.Component {
   }
 
   submitAnswer(points) {    
-    this.state.answerPoints[this.state.currentQuestion] = points
+    this.state.scoreCard[this.state.currentQuestion] = points
     const isComplete = this.isQuizComplete()
     if (isComplete) {
       const score = this.getScore()
@@ -42,21 +46,21 @@ class Quiz extends React.Component {
   tryAgain() {
     this.setState({
       currentQuestion: 0,
-      answerPoints: [],
+      scoreCard: [],
       complete: false
     })
   }
 
   isQuizComplete() {
-    const atEndOfTest = this.state.answerPoints.length === this.props.questions.length
-    const allAnswered = this.state.answerPoints.every(function(answer) {
+    const atEndOfTest = this.state.scoreCard.length === this.props.questions.length
+    const allAnswered = this.state.scoreCard.every(function(answer) {
       return answer !== null
     })
     return (atEndOfTest && allAnswered)
   }
 
   getScore() {
-    return this.state.answerPoints.reduce(function(total, points) {
+    return this.state.scoreCard.reduce(function(total, points) {
       return total + points
     }, 0)
   }

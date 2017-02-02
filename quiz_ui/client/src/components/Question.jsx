@@ -15,7 +15,7 @@ class Question extends React.Component {
   render() {
     return (
       <div className="question">
-        <Header title={this.props.question.title} score={this.props.score} />
+        <Header title={this.props.question.title} score={this.props.score} index={this.props.index}/>
         <form className="answer-form" onSubmit={this.handleSubmit}>
           {this.createAnswers()}
           <button type="submit" className="answer-button">Next</button>

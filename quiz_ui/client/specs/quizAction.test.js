@@ -53,4 +53,11 @@ describe('QuizActions', function() {
     }
     expect(QuizActions.resetQuiz()).toEqual(expectedAction)
   })
+
+  it('should create action to end quiz', function() {
+    const expectedAction = {
+      type: QuizActionTypes.END_QUIZ
+    }
+    expect(QuizActions.endQuiz()).toEqual(expectedAction)
+  })
 })

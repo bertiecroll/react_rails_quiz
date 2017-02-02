@@ -43,6 +43,8 @@ const Quiz = function(state=initialState, action) {
         perfectCard: [],
         complete: false
       })
+    case QuizActionTypes.END_QUIZ:
+      return initialState
     default:
       return state
   }

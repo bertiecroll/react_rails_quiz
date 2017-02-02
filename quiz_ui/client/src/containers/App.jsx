@@ -52,6 +52,7 @@ class App extends React.Component {
     const updateScoreCard = bindActionCreators(QuizActionCreators.updateScoreCard, dispatch)
     const updateQuestionIndex = bindActionCreators(QuizActionCreators.updateQuestionIndex, dispatch)
     const resetQuiz = bindActionCreators(QuizActionCreators.resetQuiz, dispatch)
+    const endQuiz = bindActionCreators(QuizActionCreators.endQuiz, dispatch)
 
     const content = (currentUser) ?
       <Quiz
@@ -63,6 +64,7 @@ class App extends React.Component {
         topScore={topScore}
         updateScoreCard={updateScoreCard}
         resetQuiz={resetQuiz}
+        endQuiz={endQuiz}
         complete={complete}
       /> :
       <User addUser={this.addUser}/>

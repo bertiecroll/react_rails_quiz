@@ -40,3 +40,9 @@ export const resetQuiz = function() {
     type: QuizActionTypes.RESET_QUIZ
   }
 }
+
+export const endQuiz = function() {
+  return {
+    type: QuizActionTypes.END_QUIZ
+  }
+}

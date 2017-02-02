@@ -136,5 +136,30 @@ describe('QuizReducer', function() {
     expect(quizReducer(state, action)).toEqual(expected)
   })
 
+  it('should handle END_QUIZ', function() {
+    const action = {
+      type: QuizActionTypes.END_QUIZ
+    }
+    const state = {
+      quiz: {id: 3, title: "Test Quiz", questions: ["a","b","c"]},
+      currentUser: {name: "John Smith"},
+      totalQuestions: 3,
+      currentQuestion: 3,
+      scoreCard: [10,10,10],
+      perfectCard: [15,15,15],
+      complete: true
+    }
+    const expected = {
+      quiz: null,
+      currentUser: null,
+      totalQuestions: 0,
+      currentQuestion: 0,
+      scoreCard: [],
+      perfectCard: [],
+      complete: false 
+    }
+    expect(quizReducer(state, action)).toEqual(expected)
+  })
+
 })
 

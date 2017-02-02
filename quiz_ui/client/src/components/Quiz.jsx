@@ -8,7 +8,7 @@ class Quiz extends React.Component {
   }
 
   render() {
-    const {user, questions, currentQuestion, updateQuestionIndex, updateScoreCard, score, topScore, complete, resetQuiz} = this.props
+    const {user, questions, currentQuestion, updateQuestionIndex, updateScoreCard, score, topScore, complete, resetQuiz, endQuiz} = this.props
     const question = questions[currentQuestion]
     const content = (complete) ?
       <Result
@@ -16,6 +16,7 @@ class Quiz extends React.Component {
         score={score}
         topScore={topScore}
         resetQuiz={resetQuiz}
+        endQuiz={endQuiz}
       /> :
       <Question
         user={user}

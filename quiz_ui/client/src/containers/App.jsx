@@ -25,6 +25,13 @@ class App extends React.Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if  (this.props.complete && nextProps.complete) {
+      return false
+    }
+    return true
+  }
+
   componentDidUpdate() {
     if(this.props.complete) {
       const request = new XMLHttpRequest()
